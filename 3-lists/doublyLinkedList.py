@@ -73,7 +73,7 @@ class DoublyLinkedList:
             self.head.prev = None
             temp.next = None
         self.length -= 1
-        return temp.value
+        return temp
     
     def get(self, index):
         #test for valid index
