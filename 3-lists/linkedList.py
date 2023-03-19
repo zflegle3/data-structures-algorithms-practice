@@ -149,14 +149,67 @@ class LinkedList:
         while temp is not None:
             print(temp.value)
             temp = temp.next
-        
+
+    def find_middle_node(self):
+        # Time complexity: O(n)
+        # Space complexity: O(1)
+        slow = self.head
+        fast = self.head
+        while fast is not None and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next
+        return slow.value
+
+    def has_loop(self):
+        temp = self.head
+        while temp is not None and temp.next is not None:
+            temp = temp.next
+            if temp == self.head:
+                return True
+        return False        
+    
+    def remove_duplicates(self):
+        #without set Time complexity from O(n) to O(n^2)
+        values = set()
+        prev = None
+        curr = self.head
+        while curr is not None:
+            if curr.value in values:
+                #remove node
+                prev.next = curr.next
+                self.length -= 1
+            else:
+                #add to values
+                values.add(curr.value)
+                prev = curr
+            curr = curr.next
+
+    def find_kth_from_end(self, k):
+        slow = self.head
+        fast = self.head
+        for _ in range(k):
+            if fast is None:
+                return None
+            fast  = fast.next
+        while fast is not None:
+            fast = fast.next
+            slow = slow.next
+        return slow.value
+
+
 
 my_linked_list = LinkedList(4)
+my_linked_list.append(3)
 my_linked_list.append(2)
-my_linked_list.prepend(1)
-my_linked_list.set_value(1,9)
+my_linked_list.append(1)
+# my_linked_list.prepend(1)
+# my_linked_list.set_value(1,9)
 # my_linked_list.pop_first()
 my_linked_list.print_list()
+# print(my_linked_list.find_middle_node())
+
+
+print(my_linked_list.find_kth_from_end(0))
 
 # Pop Test Cases
 #2 items
