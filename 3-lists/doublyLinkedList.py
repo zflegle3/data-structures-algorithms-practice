@@ -135,13 +135,51 @@ class DoublyLinkedList:
         self.length -= 1
         return temp
 
-my_doubly_linked_list = DoublyLinkedList(7)
+    def swap_first_last(self):
+        if self.head is None or self.head == self.tail:
+            return
+        # temp = self.head
+        # self.head.value = self.tail.value
+        # self.tail.value = temp.value
+        self.head.value, self.tail.value = self.tail.value, self.head.value
+
+    def reverse(self):
+        temp = self.head
+        #for each node, swap next and prev
+        while temp is not None:
+            #swap values of temp
+            temp.next, temp.prev = temp.prev, temp.next
+            #increment temp with swapped value
+            temp = temp.prev
+        #swap head and tails
+        self.head, self.tail = self.tail, self.head
+
+
+    def is_palindrome(self):
+        if self.length <= 1:
+            return True
+        fwd = self.head
+        bwd = self.tail
+        for i in range(self.length // 2):
+            if fwd.value != bwd.value:
+                return False
+            fwd = fwd.next
+            bwd = bwd.prev
+        return True
+        
+
+
+
+my_doubly_linked_list = DoublyLinkedList(1)
 my_doubly_linked_list.append(2)
-my_doubly_linked_list.prepend(3)
-my_doubly_linked_list.insert(1,10)
+my_doubly_linked_list.append(3)
+my_doubly_linked_list.append(4)
+# my_doubly_linked_list.insert(1,10)
 # print(my_doubly_linked_list.length)
-my_doubly_linked_list.remove(3)
+# my_doubly_linked_list.remove(3)
 my_doubly_linked_list.print_list()
+
+print(my_doubly_linked_list.reverse())
 
 # print(my_doubly_linked_list.get(1))
 # print(my_doubly_linked_list.get(2))
